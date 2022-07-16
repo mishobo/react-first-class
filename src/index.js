@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { useState } from 'react'
+import { useReducer } from 'react'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
@@ -47,7 +47,7 @@ function Main(props) {
     'Salmon and Potatoes',
   ]
 
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useReducer((checked) => !checked, false)
   return (
     <section>
       <img
@@ -60,11 +60,7 @@ function Main(props) {
           <li key={i}>{dish}</li>
         ))}
       </ul>
-      <input
-        type="checkbox"
-        value={checked}
-        onChange={() => setChecked((checked) => !checked)}
-      />
+      <input type="checkbox" value={checked} onChange={setChecked} />
 
       <label>{checked ? 'checked' : 'not checked'}</label>
     </section>
