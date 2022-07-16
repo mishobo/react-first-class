@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { useState } from 'react'
 
-const myFirstElement = <h1>Hello React!</h1>
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(myFirstElement)
+function MyFirstElement() {
+  return <h1>Hello React!</h1>
+}
 
-const numbersOne = [1, 2, 3]
-const numbersTwo = [4, 5, 6]
-const numbersCombined = [...numbersOne, ...numbersTwo]
-
-const root1 = ReactDOM.createRoot(document.getElementById('root1'))
-root1.render(numbersCombined)
+function Numbers() {
+  const numbersOne = [1, 2, 3]
+  const numbersTwo = [4, 5, 6]
+  const numbersCombined = [...numbersOne, ...numbersTwo]
+  return numbersCombined
+}
 
 function Car(props) {
   return <h2>Hi, I am a {props.brand.model}</h2>
@@ -26,15 +27,61 @@ function Garage() {
   )
 }
 
-const root2 = ReactDOM.createRoot(document.getElementById('root2'))
-root2.render(<Garage />)
-
 function Football() {
-  const shoot = () => {
-    alert('Great Shot!')
+  const shoot = (a, b) => {
+    alert(b.type)
   }
-  return <button onClick={shoot}>Take the shot!</button>
+  return (
+    <>
+      <br></br>
+      <br></br>
+      <button onClick={(event) => shoot('Goal', event)}>Take the shot!</button>
+    </>
+  )
 }
 
-const root3 = ReactDOM.createRoot(document.getElementById('root3'))
-root3.render(<Football />)
+function Main(props) {
+  const dishes = [
+    'Black Bean soup',
+    'Macaroni and Cheese',
+    'Salmon and Potatoes',
+  ]
+
+  const [checked, setChecked] = useState(false)
+  return (
+    <section>
+      <img
+        src="./pexels-dmitriy-piskarev-8894884.jpg"
+        height={400}
+        alt="restuarnat"
+      />
+      <ul>
+        {dishes.map((dish, i) => (
+          <li key={i}>{dish}</li>
+        ))}
+      </ul>
+      <input
+        type="checkbox"
+        value={checked}
+        onChange={() => setChecked((checked) => !checked)}
+      />
+
+      <label>{checked ? 'checked' : 'not checked'}</label>
+    </section>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <MyFirstElement />
+      <Numbers />
+      <Football />
+      <Garage />
+      <Main />
+    </>
+  )
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)
