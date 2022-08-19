@@ -10,6 +10,8 @@ import Blogs from './pages/Blogs'
 import Contact from './pages/Contact'
 import NoPage from './pages/NoPage'
 import Todos from './Todos'
+import './CSS/stylesheet.css'
+import Car from './Car.js'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
@@ -22,16 +24,20 @@ function Numbers() {
   return numbersCombined
 }
 
-function Car(props) {
-  return <h2>Hi, I am a {props.brand.model}</h2>
+function Car1(props) {
+  return (
+    <h2 style={{ backgroundColor: 'lightblue' }}>
+      Hi, I am a {props.brand.model}
+    </h2>
+  )
 }
 
 function Garage() {
-  const carInfo = { name: 'Mazda', model: 'Axela' }
+  const Car1Info = { name: 'Mazda', model: 'Axela' }
   return (
     <>
-      <h1>Who lives in my Garage?</h1>
-      <Car brand={carInfo} />
+      <h1 style={{ color: 'red' }}>Who lives in my Garage?</h1>
+      <Car1 brand={Car1Info} />
     </>
   )
 }
@@ -49,15 +55,22 @@ function Football() {
   )
 }
 
-// lists
+// lists, inline CSS
 function Main(props) {
   const dishes = [
     'Black Bean soup',
     'Macaroni and Cheese',
     'Salmon and Potatoes',
   ]
-
   const [checked, setChecked] = useReducer((checked) => !checked, false)
+
+  const myStyle = {
+    color: 'white',
+    backgroundColor: 'DodgerBlue',
+    padding: '10px',
+    fontFamily: 'Sans-Serif',
+  }
+
   return (
     <section>
       <img
@@ -65,7 +78,7 @@ function Main(props) {
         height={400}
         alt="restuarnat"
       />
-      <ul>
+      <ul style={myStyle}>
         {dishes.map((dish, i) => (
           <li key={i}>{dish}</li>
         ))}
@@ -102,7 +115,7 @@ function Forms() {
 function GithubUser({ name, location }) {
   return (
     <div>
-      <h1>{name}</h1>
+      <h1 style={{ color: 'red' }}>{name}</h1>
       <p>{location}</p>
     </div>
   )
@@ -119,7 +132,7 @@ function Hooks() {
 
   if (data) return <GithubUser name={data.name} location={data.location} />
 
-  return <h1>Data</h1>
+  return <h1 style={{ color: 'red' }}>Data</h1>
 }
 
 // ROUTING
@@ -170,6 +183,7 @@ function App() {
       <Hooks />
       <Routing />
       <TodoList />
+      <Car />
     </>
   )
 }
