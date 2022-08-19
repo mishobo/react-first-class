@@ -12,6 +12,7 @@ import NoPage from './pages/NoPage'
 import Todos from './Todos'
 import './CSS/stylesheet.css'
 import Car from './Car.js'
+import './CSS/my-sass.scss'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
