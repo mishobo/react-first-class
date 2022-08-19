@@ -2,6 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { useReducer } from 'react'
 import { useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './pages/Layout'
+import Home from './pages/Home'
+import Blogs from './pages/Blogs'
+import Contact from './pages/Contact'
+import NoPage from './pages/NoPage'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
@@ -41,6 +48,7 @@ function Football() {
   )
 }
 
+// lists
 function Main(props) {
   const dishes = [
     'Black Bean soup',
@@ -68,6 +76,7 @@ function Main(props) {
   )
 }
 
+// Forms
 function Forms() {
   const txtTitle = useRef()
   const hexColor = useRef()
@@ -89,6 +98,45 @@ function Forms() {
   )
 }
 
+function GithubUser({ name, location }) {
+  return (
+    <div>
+      <h1>{name}</h1>
+      <p>{location}</p>
+    </div>
+  )
+}
+
+function Hooks() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    fetch('https://api.github.com/users/mishobo')
+      .then((response) => response.json())
+      .then(setData)
+  }, [])
+
+  if (data) return <GithubUser name={data.name} location={data.location} />
+
+  return <h1>Data</h1>
+}
+
+// ROUTING
+export default function Routing() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
 function App() {
   return (
     <>
@@ -98,6 +146,8 @@ function App() {
       <Garage />
       <Main />
       <Forms />
+      <Hooks />
+      <Routing />
     </>
   )
 }
