@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Blogs from './pages/Blogs'
 import Contact from './pages/Contact'
 import NoPage from './pages/NoPage'
+import Todos from './Todos'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
@@ -137,6 +138,26 @@ export default function Routing() {
   )
 }
 
+const TodoList = () => {
+  const [count, setCount] = useState(0)
+  const [todos] = useState(['todo 1', 'todo 2'])
+
+  const increment = () => {
+    setCount((c) => c + 1)
+  }
+
+  return (
+    <>
+      <Todos todos={todos} />
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+      </div>
+    </>
+  )
+}
+
 function App() {
   return (
     <>
@@ -148,6 +169,7 @@ function App() {
       <Forms />
       <Hooks />
       <Routing />
+      <TodoList />
     </>
   )
 }
