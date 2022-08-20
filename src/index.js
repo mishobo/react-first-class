@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { useReducer } from 'react'
-import { useRef } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './pages/Layout'
 import Home from './pages/Home'
@@ -208,6 +207,26 @@ function Timer() {
   return <h1>I have rendered {count} times!</h1>
 }
 
+function UseRefHook() {
+  const [inputValue, setInputValue] = useState('')
+  const count = useRef(0)
+
+  useEffect(() => {
+    count.current = count.current + 1
+  })
+
+  return (
+    <>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <h1>Render Count: {count.current}</h1>
+    </>
+  )
+}
+
 function App() {
   return (
     <>
@@ -223,6 +242,7 @@ function App() {
       <Car />
       <FavoriteColor />
       <Timer />
+      <UseRefHook />
     </>
   )
 }
