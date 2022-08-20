@@ -12,7 +12,6 @@ import Todos from './Todos'
 import './CSS/stylesheet.css'
 import Car from './Car.js'
 import './CSS/my-sass.scss'
-import useFetch from './useFetch'
 
 function MyFirstElement() {
   return <h1>Hello React!</h1>
@@ -228,19 +227,6 @@ function UseRefHook() {
   )
 }
 
-//custom hook to fect API DATA
-function CustomHook() {
-  const [data] = useFetch('https://jsonplaceholder.typicode.com/todos')
-  return (
-    <>
-      {data &&
-        data.map((item) => {
-          return <p key={item.id}>{item.title}</p>
-        })}
-    </>
-  )
-}
-
 function App() {
   return (
     <>
@@ -257,7 +243,6 @@ function App() {
       <FavoriteColor />
       <Timer />
       <UseRefHook />
-      <CustomHook />
     </>
   )
 }
